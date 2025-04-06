@@ -8,14 +8,4 @@ return { -- Themes I constantly switch to
 		"ellisonleao/gruvbox.nvim",
 		priority = 1000,
 	},
-	{ -- "tokyonight"
-		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
-	},
-	{ -- "onenord"
-		"rmehri01/onenord.nvim",
-		lazy = false,
-		priority = 1000,
-	},
 }
