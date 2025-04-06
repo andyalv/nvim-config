@@ -15,4 +15,5 @@ The main features of this config are:
 - some utilities and QoL with `nvim-autopairs`, `conform.nvim`, `mini.nvim` and `vim-resize-mode`
 
 > I am running nvim on [WSL](https://learn.microsoft.com/en-us/windows/wsl/install), so the setup for vimtex and some other configurations might be different from working on Linux.
+
 > The purpose the branch `remote` is for downloading my config on remote devices.
