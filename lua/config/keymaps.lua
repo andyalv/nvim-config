@@ -43,3 +43,9 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 -- indicating the ident I'm still hesitant to delete it, so I've made a mapping to
 -- toggle it '<leader>k'
 vim.api.nvim_set_keymap("n", "<leader>k", ":set list!<CR>", { noremap = true, silent = true, desc = "Toggle [L]ist" })
+
+-- Save buffers
+-- WARNING: Some terminal use the command <C-s> to stop updating the terminal,
+-- this is not the case on the Windows Terminal, but it may cause issues on other terminals
+vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>a", { noremap = true, silent = true })
