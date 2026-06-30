@@ -29,14 +29,16 @@ return { -- LSP Plugins
 			"hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
-			require("lspconfig").asm_lsp.setup({
+			vim.lsp.config("asm_lsp", {
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
-				root_dir = function(fname)
+				root_dir = function(bufnr, on_dir)
+					local fname = vim.api.nvim_buf_get_name(bufnr)
 					if fname:match("%.asm$") or fname:match("%.s$") then
-						return vim.fn.getcwd() -- Usa el directorio de trabajo actual
+						on_dir(vim.fn.getcwd()) -- Usa el directorio de trabajo actual
 					end
 				end,
 			})
+			vim.lsp.enable("asm_lsp")
 
 			--  This function gets run when an LSP attaches to a particular buffer.
 			--    That is to say, every time a new file is opened that is associated with
@@ -205,7 +207,8 @@ return { -- LSP Plugins
 						-- by the server configuration above. Useful when disabling
 						-- certain features of an LSP (for example, turning off formatting for ts_ls)
 						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-						require("lspconfig")[server_name].setup(server)
+						vim.lsp.config(server_name, server)
+						vim.lsp.enable(server_name)
 					end,
 				},
 			})

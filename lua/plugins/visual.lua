@@ -48,7 +48,9 @@ return {
 		end,
 	},
 	{
-		"norcalli/nvim-colorizer.lua",
+		-- Fork maintained while norcalli/nvim-colorizer.lua still uses deprecated APIs.
+		-- Revisit the original repository if upstream maintenance resumes.
+		"catgoose/nvim-colorizer.lua",
 		config = function()
 			require("colorizer").setup()
 		end,
