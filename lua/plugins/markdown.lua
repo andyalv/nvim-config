@@ -8,6 +8,7 @@ return {
 	config = function()
 		require("render-markdown").setup({
 			render_modes = true,
+			latex = { enabled = false },
 		})
 	end,
 }
