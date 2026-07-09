@@ -19,15 +19,7 @@ return {
 					-- NOTE: `friendly-snippets` contains a variety of premade snippets.
 					--    See the README about individual language/framework/plugin snippets:
 					--    https://github.com/rafamadriz/friendly-snippets
-					{
-						"rafamadriz/friendly-snippets",
-						config = function()
-							require("luasnip.loaders.from_vscode").lazy_load()
-
-							require("luasnip").filetype_extend("typescript", { "html", "javascript" })
-							require("luasnip").filetype_extend("typescriptreact", { "html", "javascript" })
-						end,
-					},
+					"rafamadriz/friendly-snippets",
 				},
 			},
 			"saadparwaiz1/cmp_luasnip",
@@ -43,7 +35,20 @@ return {
 			-- See `:help cmp`
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
-			luasnip.config.setup({})
+			local snippet_filetypes = {
+				astro = { "html", "javascript", "typescript", "javascriptreact", "typescriptreact" },
+				typescript = { "html", "javascript" },
+				typescriptreact = { "html", "javascript" },
+			}
+
+			luasnip.config.setup({
+				load_ft_func = require("luasnip.extras.filetype_functions").extend_load_ft(vim.deepcopy(snippet_filetypes)),
+			})
+			require("luasnip.loaders.from_vscode").lazy_load()
+
+			for filetype, extends in pairs(snippet_filetypes) do
+				luasnip.filetype_extend(filetype, extends)
+			end
 
 			cmp.setup({
 				snippet = {
